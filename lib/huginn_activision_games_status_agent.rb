@@ -1,0 +1,4 @@
+require 'huginn_agent'
+
+#HuginnAgent.load 'huginn_activision_games_status_agent/concerns/my_agent_concern'
+HuginnAgent.register 'huginn_activision_games_status_agent/activision_games_status_agent'
