@@ -78,6 +78,7 @@ module Agents
     form_configurable :wii, type: :boolean
     form_configurable :ios, type: :boolean
     form_configurable :expected_receive_period_in_days, type: :string
+
     def validate_options
 
       if options.has_key?('changes_only') && boolify(options['changes_only']).nil?
@@ -90,15 +91,7 @@ module Agents
     end
 
     def working?
-      memory['last_status'].to_i > 0
-
-      return false if recent_error_logs?
-      
-      if interpolated['expected_receive_period_in_days'].present?
-        return false unless last_receive_at && last_receive_at > interpolated['expected_receive_period_in_days'].to_i.days.ago
-      end
-
-      true
+      event_created_within?(options['expected_receive_period_in_days']) && !recent_error_logs?
     end
 
     def check
@@ -106,15 +99,6 @@ module Agents
     end
 
     private
-
-#    def event_per_filter(status)
-#      log " game_filter -> #{interpolated['game_filter']}"
-##      game_filter = JSON.parse(interpolated['game_filter'])
-#      game_filter.each do |game|
-#        log game
-#      end
-#      log "loop finished"
-#    end
 
     def filter(status)
       create_event = false
