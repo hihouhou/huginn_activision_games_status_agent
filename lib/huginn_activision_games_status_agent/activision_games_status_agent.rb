@@ -39,13 +39,14 @@ module Agents
 
     event_description <<-MD
       Events look like this:
-        {
-          "status": "ok",
-          "platform": "All platforms",
-          "gameTitle": "Call of Duty: Modern Warfare",
-          "eventId": "9531",
-          "alertId": "a0i4P00000TVnMVQA1"
-        }
+
+          {
+            "status": "ok",
+            "platform": "All platforms",
+            "gameTitle": "Call of Duty: Modern Warfare",
+            "eventId": "9531",
+            "alertId": "a0i4P00000TVnMVQA1"
+          }
     MD
 
     def default_options
